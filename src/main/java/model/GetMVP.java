@@ -17,7 +17,7 @@ public class GetMVP {
 
         for (int i = 0; i < gameFields.size(); i++) {
             String[] goals = gameFields.get(i).getGoals().split(";");
-            if (goals.length == goalsTypeCount) {
+            if (goals.length == goalsTypeCount && checkExistGoals(goals)) {
                 int scorePoint = Integer.parseInt(goals[0]);
                 int rebound = Integer.parseInt(goals[1]);
                 int assist = Integer.parseInt(goals[2]);
@@ -47,7 +47,7 @@ public class GetMVP {
 
         for (int i = 0; i < gameFields.size(); i++) {
             String[] goals = gameFields.get(i).getGoals().split(";");
-            if (goals.length == goalsTypeCount) {
+            if (goals.length == goalsTypeCount && checkExistGoals(goals)) {
                 int goalMade = Integer.parseInt(goals[0]);
                 int goalReceived = Integer.parseInt(goals[1]);
 
@@ -124,6 +124,18 @@ public class GetMVP {
             }
         }
         return maxMapValue(scoreTeams);
+    }
+
+    private boolean checkExistGoals(String[] goals){
+        boolean allIsExist = true;
+
+        for(String goal:goals){
+            if(goal.isEmpty()){
+                allIsExist = false;
+            }
+        }
+
+        return allIsExist;
     }
 
     public <K, V extends Comparable<V>> K maxMapValue(Map<K, V> map) {
